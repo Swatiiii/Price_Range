@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Slider - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #range {
+            font-weight: bold;
+            /* margin-top: 10px; */
+        }
+        body{
+            background-color: #caecee;
+            text-align: center;
+        }
+        table, th, td{
+            border: solid 2px black;
+            padding: 10px;
+        }
+        table{
+
+            /* margin: auto; */
+            border-collapse: collapse;
+            margin: 21px 530px;
+        }
+        th, tr:nth-child(odd){
+            background: cadetblue;
+        }
+        tr:nth-child(even){
+            background: rgb(59, 221, 226);
+        }
+        .ui-slider{
+            width: 600px;
+            padding-left: 10px;
+            background: rgb(32, 100, 139);
+            margin: auto;
+
+        }
+        .ui-slider .ui-slider-range
+        {
+            background: rgb(107, 197, 107);
+        }
+        .ui-slider .ui-slider-handle{
+            background: black;
+        }
+    </style>
+
+    <script>
+         var details = {
+            "printer cable": 5,
+            "harddisk": 10,
+            "stylus pen": 15,
+            "speaker": 25,
+            "memory card": 30,
+            "usb cable":35,
+            "headset":40,
+            "security hub": 45,
+            "printer": 50
+  }
+
+        $(function () {
+            $("#slider").slider({ max: 50, Range: true, values: [0, 30] });
+            var current = $("#slider").slider("option", "values");
+            getDetails(current[0], current[1]);
+        });
+
+        function getDetails(minimum, maximum) {
+            $("#range").text("$" + minimum + " - $" + maximum);
+            var results = "<table><tr><th>Product Name</th><th>Price (in $)</th></tr>";
+            for (var items in details) {
+
+                if (details[items] >= minimum && details[items] <= maximum) {
+                    results += "<tr><td>" + items  + "</td><td>" + details[items] + "</td></tr>";
+                }
+            }
+            results += "</table>";
+            $("#output").html(results);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <b>Price Range: </b><span id="range"></span><br /> <br />
+    <div id="slider"></div>
+    <div id="output"></div>
+
+</body>
+
+</html>
